@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GradeBook
 {
@@ -6,24 +7,12 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
-            var numbers = new[] {12.7, 10.3, 6.11, 4.1};
+            var book = new Book("Dash Grade Book");
+            book.AddGrade(89.1);
+            book.AddGrade(90.5);
+            book.AddGrade(77.5);
+            book.ShowStatistiscs();
 
-            var result = 0.0;
-            foreach(var number in numbers)
-            {
-                result += number;
-            }
-            Console.WriteLine(result);
-
-
-            if (args.Length > 0)
-            {
-                Console.WriteLine($"Hello, {args[0]} !");
-            }
-            else
-            {
-                Console.WriteLine("Hello!");
-            }
         }
 
     }
