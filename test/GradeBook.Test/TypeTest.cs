@@ -4,33 +4,41 @@ using Xunit;
 namespace GradeBook.Test
 {
   public delegate string WriteLogDelegate(string logMessage);
-  
+
   public class TypeTest
   {
+    int count = 0;
 
     [Fact]
     public void WriteDelegateCanPointToMethod()
     {
-      WriteLogDelegate log;
+      WriteLogDelegate log = ReturnMessage;
 
-      log = ReturnMessage;
-      
+      log += ReturnMessage;
+      log += IncrementCount;
+
       var result = log("Hello");
-      Assert.Equal(result, "Hello");
+      Assert.Equal(3, count);
+    }
+    string IncrementCount(string message)
+    {
+      count++;
+      return message;
     }
     string ReturnMessage(string message)
     {
+      count++;
       return message;
     }
-     [Fact]
-     public void StringsBehaveLikeValueTypes() 
-     {
-         string name = "Dash";
-         var upper = MakeUppercase(name);
+    [Fact]
+    public void StringsBehaveLikeValueTypes()
+    {
+      string name = "Dash";
+      var upper = MakeUppercase(name);
 
-         Assert.Equal("Dash", name);
-         Assert.Equal("DASH", upper);
-     }
+      Assert.Equal("Dash", name);
+      Assert.Equal("DASH", upper);
+    }
 
     private string MakeUppercase(string parameter)
     {
@@ -40,10 +48,10 @@ namespace GradeBook.Test
     [Fact]
     public void Test1()
     {
-        var x = GetAnInt();
-        SetInt(ref x);
+      var x = GetAnInt();
+      SetInt(ref x);
 
-        Assert.Equal(42, x);
+      Assert.Equal(42, x);
     }
 
     private void SetInt(ref int x)
